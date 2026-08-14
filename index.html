@@ -58,14 +58,14 @@
         }
 
         .glass-panel {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
         body.light-mode .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(226, 232, 240, 0.9);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
         .glass-card {
@@ -143,7 +143,7 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body id="body-root" class="min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+<body id="body-root" class="min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300 relative pb-16">
 
     <!-- Background Glow Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -214,7 +214,7 @@
     </header>
 
     <!-- Main Workspace -->
-    <main class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-3.5 sm:py-5 relative z-10 space-y-4 flex-1 w-full">
+    <main class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-3.5 sm:py-5 relative z-10 space-y-4 flex-1 w-full pb-20">
 
         <!-- Category Tag Chips Bar -->
         <div id="tags-bar" class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1.5 hide-scrollbar touch-pan-x"></div>
@@ -256,18 +256,15 @@
 
     </main>
 
-    <!-- Sleek Theme-Adaptive Footer -->
-    <footer class="w-full py-5 border-t border-white/10 glass-panel mt-8 text-center relative z-20">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs font-semibold theme-text-sub">
-            <p class="flex items-center justify-center gap-1.5 text-xs sm:text-sm">
-                <span>Made with</span>
-                <svg class="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>by</span>
-                <a href="https://github.com/saurabhdhull1" target="_blank" rel="noopener" class="font-extrabold theme-text-main hover:text-indigo-500 underline decoration-indigo-500/50 underline-offset-4 transition-colors">
-                    saurabh dhull
-                </a>
-            </p>
-            <p class="text-[10px] sm:text-[11px] theme-text-sub">© 2026 Wallpapers • Direct Downloads</p>
+    <!-- STICKY FLOATING CAPSULE FOOTER -->
+    <footer class="fixed bottom-3.5 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+        <div class="glass-panel px-4 py-2 rounded-full border border-white/20 shadow-2xl backdrop-blur-xl flex items-center justify-center gap-1.5 text-xs font-bold theme-text-main whitespace-nowrap shadow-indigo-500/10">
+            <span>Made with</span>
+            <svg class="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>by</span>
+            <a href="https://github.com/saurabhdhull1" target="_blank" rel="noopener" class="font-extrabold hover:text-indigo-400 underline decoration-indigo-500/50 underline-offset-2 transition-colors">
+                saurabh dhull
+            </a>
         </div>
     </footer>
 
@@ -354,7 +351,7 @@
     </div>
 
     <!-- Floating Toast Alert -->
-    <div id="toast-alert" class="fixed bottom-4 right-4 left-4 sm:left-auto z-50 px-4 py-2.5 rounded-xl glass-panel border border-indigo-500/50 shadow-2xl text-xs font-extrabold theme-text-main flex items-center gap-2.5 transition-all duration-300 translate-y-10 opacity-0 pointer-events-none">
+    <div id="toast-alert" class="fixed bottom-16 right-4 left-4 sm:left-auto z-50 px-4 py-2.5 rounded-xl glass-panel border border-indigo-500/50 shadow-2xl text-xs font-extrabold theme-text-main flex items-center gap-2.5 transition-all duration-300 translate-y-10 opacity-0 pointer-events-none">
         <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <span id="toast-msg">Notification</span>
     </div>
