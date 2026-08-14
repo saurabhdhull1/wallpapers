@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Wallpapers — 4K & UltraHD Wallpapers Gallery</title>
+    <meta name="description" content="Explore a curated gallery of high quality 4K, 8K, anime, minimal, cyberpunk, and aesthetic wallpapers. Free direct download.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Vue 3 & Tailwind CSS -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide-vue-next@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        },
+                        neon: {
+                            cyan: '#00f2fe',
+                            teal: '#4facfe',
+                            pink: '#ff0844',
+                            purple: '#b224ef'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Liquid Glass & Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.25);
+        }
+
+        .light-mode .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        .light-mode .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.6);
+            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.15);
+        }
+
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .light-mode .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#080c14] text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+    <div id="app" :class="{'light-mode': !isDarkMode}">
+
+        <!-- Background Glow Orbs -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px] animate-pulse-slow"></div>
+            <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]"></div>
+            <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-purple-600/15 rounded-full blur-[128px]"></div>
+            <div class="absolute inset-0 bg-grid-pattern"></div>
+        </div>
+
+        <!-- Floating Navbar -->
+        <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/10 px-4 lg:px-8 py-3.5 transition-all">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+                
+                <!-- Logo & Stats -->
+                <div class="flex items-center justify-between w-full md:w-auto">
+                    <a href="#" @click.preventDefault="resetFilters" class="flex items-center space-x-3 group">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[2px] shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform duration-300">
+                            <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                                <i data-lucide="image" class="w-5 h-5 text-indigo-400 group-hover:rotate-6 transition-transform"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="font-display font-black text-xl tracking-tight text-white flex items-center gap-2">
+                                <span>WALLPAPERS</span>
+                                <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-md bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-sm">Ultra HD</span>
+                            </h1>
+                            <p class="text-[11px] font-medium text-slate-400 flex items-center gap-1.5">
+                                <span>{{ wallpapers.length }} Curated Wallpapers</span>
+                                <span>•</span>
+                                <span class="text-indigo-400 font-semibold">Free Direct Download</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- Mobile Theme & Favorites Quick Toggle -->
+                    <div class="flex items-center gap-2 md:hidden">
+                        <button @click="activeTab = activeTab === 'favorites' ? 'all' : 'favorites'" 
+                                :class="['p-2 rounded-xl border transition-all text-xs font-bold flex items-center gap-1', 
+                                         activeTab === 'favorites' ? 'bg-rose-500/20 text-rose-400 border-rose-500/40' : 'bg-slate-800/80 border-white/10 text-slate-300']">
+                            <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}"></i>
+                            <span>{{ favorites.length }}</span>
+                        </button>
+
+                        <button @click="toggleTheme" class="p-2 rounded-xl bg-slate-800/80 border border-white/10 text-slate-300 hover:text-white transition-all">
+                            <i :data-lucide="isDarkMode ? 'sun' : 'moon'" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Central Search Bar -->
+                <div class="relative w-full md:max-w-xl">
+                    <div class="relative flex items-center">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 text-slate-400"></i>
+                        <input 
+                            ref="searchInput"
+                            type="text" 
+                            v-model="searchQuery"
+                            @focus="isSearchFocused = true"
+                            @blur="setTimeout(() => isSearchFocused = false, 200)"
+                            @keydown.down.prevent="navigateSearch(1)"
+                            @keydown.up.prevent="navigateSearch(-1)"
+                            @keydown.enter.prevent="selectHighlightedSearch"
+                            @keydown.esc="searchQuery = ''"
+                            placeholder="Search wallpapers by title, format or @tag..."
+                            class="w-full pl-10 pr-20 py-2.5 rounded-2xl bg-slate-900/90 border border-white/15 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all shadow-inner"
+                        >
+                        <div class="absolute right-3 flex items-center gap-1.5 text-xs text-slate-400">
+                            <button v-if="searchQuery" @click="searchQuery = ''" class="p-1 hover:text-white transition-colors">
+                                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                            </button>
+                            <span v-else class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 rounded border border-white/10 text-slate-400">Ctrl K</span>
+                        </div>
+                    </div>
+
+                    <!-- Search Suggestions Dropdown -->
+                    <div v-if="isSearchFocused && searchResults.length > 0 && searchQuery.trim()" 
+                         class="absolute top-full left-0 right-0 mt-2 p-2 rounded-2xl glass-panel border border-indigo-500/30 shadow-2xl z-50 max-h-80 overflow-y-auto">
+                        <div v-for="(item, idx) in searchResults.slice(0, 8)" 
+                             :key="item.filename"
+                             @mousedown.prevent="openLightbox(item)"
+                             :class="['p-2.5 rounded-xl cursor-pointer flex items-center gap-3 transition-all', 
+                                      highlightedIndex === idx ? 'bg-indigo-600/30 text-white border border-indigo-500/40' : 'hover:bg-slate-800/80 text-slate-300']">
+                            <img :src="'./images/' + item.filename" :alt="item.filename" class="w-10 h-10 rounded-lg object-cover bg-slate-800 shrink-0">
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs font-bold text-white truncate">{{ formatTitle(item.filename) }}</p>
+                                <p class="text-[11px] text-slate-400 truncate flex items-center gap-2">
+                                    <span>{{ item.metadata.width }}x{{ item.metadata.height }}</span>
+                                    <span>•</span>
+                                    <span>{{ item.metadata.file_size_mb }} MB</span>
+                                    <span v-if="item.tags.length">• Tags: {{ item.tags.join(', ') }}</span>
+                                </p>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Quick Controls & Filter Buttons -->
+                <div class="hidden md:flex items-center gap-3">
+                    
+                    <!-- Favorites Filter Button -->
+                    <button @click="activeTab = activeTab === 'favorites' ? 'all' : 'favorites'" 
+                            :class="['px-3.5 py-2 rounded-2xl border transition-all text-xs font-extrabold flex items-center gap-2 cursor-pointer shadow-sm', 
+                                     activeTab === 'favorites' ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-rose-500/20' : 'bg-slate-900/80 hover:bg-slate-800 border-white/10 text-slate-300']">
+                        <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}"></i>
+                        <span>Favorites</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-800 text-rose-400 border border-rose-500/30">{{ favorites.length }}</span>
+                    </button>
+
+                    <!-- Aspect Ratio Filter Dropdown -->
+                    <select v-model="aspectFilter" class="px-3 py-2 rounded-2xl bg-slate-900/80 border border-white/10 text-xs font-bold text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer">
+                        <option value="all">All Devices</option>
+                        <option value="desktop">Desktop (16:9 / 21:9)</option>
+                        <option value="mobile">Mobile (9:16)</option>
+                        <option value="4k">4K UHD Resolution</option>
+                    </select>
+
+                    <!-- Sort Dropdown -->
+                    <select v-model="sortBy" class="px-3 py-2 rounded-2xl bg-slate-900/80 border border-white/10 text-xs font-bold text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer">
+                        <option value="default">Default</option>
+                        <option value="resolution">Highest Resolution</option>
+                        <option value="size">File Size (Largest)</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+
+                    <!-- Theme Toggle -->
+                    <button @click="toggleTheme" 
+                            title="Toggle Light/Dark Theme"
+                            class="p-2.5 rounded-2xl bg-slate-900/80 border border-white/10 text-slate-300 hover:text-white hover:border-indigo-500/50 transition-all cursor-pointer">
+                        <i :data-lucide="isDarkMode ? 'sun' : 'moon'" class="w-4.5 h-4.5"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="max-w-7xl mx-auto px-4 lg:px-8 py-6 relative z-10 space-y-6">
+
+            <!-- Category Tag Chips Bar -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                <button @click="selectedTag = 'all'" 
+                        :class="['px-4 py-2 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer shadow-sm', 
+                                 selectedTag === 'all' ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-indigo-500/25 scale-105' : 'bg-slate-900/70 hover:bg-slate-800 border border-white/10 text-slate-300']">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>All Wallpapers</span>
+                    <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-950/50 text-indigo-300">{{ wallpapers.length }}</span>
+                </button>
+
+                <button v-for="tag in popularTags" 
+                        :key="tag.name"
+                        @click="selectedTag = selectedTag === tag.name ? 'all' : tag.name"
+                        :class="['px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer', 
+                                 selectedTag === tag.name ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 scale-105 border border-indigo-400/50' : 'bg-slate-900/60 hover:bg-slate-800 border border-white/10 text-slate-300']">
+                    <span class="capitalize">#{{ tag.name }}</span>
+                    <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-950/40 text-slate-400">{{ tag.count }}</span>
+                </button>
+            </div>
+
+            <!-- Header Info Banner / Active Filter Status -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/40 border border-white/10 p-4 rounded-3xl backdrop-blur-md">
+                <div>
+                    <h2 class="text-lg font-black text-white flex items-center gap-2">
+                        <span>{{ activeTab === 'favorites' ? 'My Saved Favorites' : (selectedTag !== 'all' ? '#' + selectedTag + ' Wallpapers' : 'Curated Wallpaper Gallery') }}</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold border border-indigo-500/30">
+                            {{ filteredWallpapers.length }} Items
+                        </span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        High resolution original images with direct one-click download support.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-2 self-end sm:self-center">
+                    <button v-if="selectedTag !== 'all' || searchQuery || activeTab === 'favorites' || aspectFilter !== 'all'" 
+                            @click="resetFilters"
+                            class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <span>Reset Filters</span>
+                    </button>
+
+                    <!-- Column Layout Selector -->
+                    <div class="hidden sm:flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-white/10">
+                        <button @click="gridCols = 3" :class="['p-1.5 rounded-lg transition-all', gridCols === 3 ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white']">
+                            <i data-lucide="grid-2x2" class="w-4 h-4"></i>
+                        </button>
+                        <button @click="gridCols = 4" :class="['p-1.5 rounded-lg transition-all', gridCols === 4 ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white']">
+                            <i data-lucide="grid-3x3" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div v-if="filteredWallpapers.length === 0" class="py-20 text-center space-y-4 glass-panel rounded-3xl border border-white/10">
+                <div class="w-16 h-16 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto border border-indigo-500/30">
+                    <i data-lucide="image-off" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-black text-white">No wallpapers match your criteria</h3>
+                    <p class="text-xs text-slate-400 max-w-sm mx-auto mt-1">
+                        Try adjusting your search query, clearing tag filters, or switching device resolution mode.
+                    </p>
+                </div>
+                <button @click="resetFilters" class="px-5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-indigo-500/30">
+                    Clear All Filters
+                </button>
+            </div>
+
+            <!-- Main Wallpaper Cards Grid -->
+            <div v-else :class="['grid gap-4 sm:gap-6 transition-all duration-300', 
+                                gridCols === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4']">
+                
+                <div v-for="wallpaper in paginatedWallpapers" 
+                     :key="wallpaper.filename"
+                     class="glass-card rounded-3xl overflow-hidden group flex flex-col relative">
+                    
+                    <!-- Image Box -->
+                    <div class="relative aspect-video sm:aspect-[16/10] overflow-hidden bg-slate-950 cursor-pointer"
+                         @click="openLightbox(wallpaper)">
+                        
+                        <img :src="'./images/' + wallpaper.filename" 
+                             :alt="wallpaper.filename" 
+                             loading="lazy"
+                             @error="handleImgError($event, wallpaper)"
+                             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+
+                        <!-- Quality & Specs Badge Overlay -->
+                        <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5 z-10 pointer-events-none">
+                            <span class="px-2.5 py-1 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/20 text-[10px] font-extrabold tracking-wider uppercase text-cyan-300 shadow-lg">
+                                {{ getResolutionLabel(wallpaper.metadata.width, wallpaper.metadata.height) }}
+                            </span>
+                            <span v-if="wallpaper.metadata.file_size_mb" class="px-2 py-1 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-[10px] font-bold text-slate-300">
+                                {{ wallpaper.metadata.file_size_mb }} MB
+                            </span>
+                        </div>
+
+                        <!-- Favorite Quick Button (Top Right) -->
+                        <button @click.stop="toggleFavorite(wallpaper)" 
+                                :title="isFavorite(wallpaper.filename) ? 'Remove from favorites' : 'Save to favorites'"
+                                :class="['absolute top-3 right-3 p-2 rounded-2xl backdrop-blur-md border transition-all z-10 cursor-pointer shadow-lg', 
+                                         isFavorite(wallpaper.filename) ? 'bg-rose-500/30 border-rose-500/60 text-rose-400' : 'bg-slate-950/60 border-white/20 text-white hover:bg-rose-500/20 hover:text-rose-400']">
+                            <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500': isFavorite(wallpaper.filename)}"></i>
+                        </button>
+
+                        <!-- Hover Action Quick Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4 z-20">
+                            <div class="space-y-1 min-w-0">
+                                <h4 class="text-sm font-black text-white truncate drop-shadow">{{ formatTitle(wallpaper.filename) }}</h4>
+                                <p class="text-[11px] font-medium text-slate-300 flex items-center gap-2">
+                                    <span>{{ wallpaper.metadata.width }} x {{ wallpaper.metadata.height }}</span>
+                                    <span>•</span>
+                                    <span>{{ getFileExt(wallpaper.filename) }}</span>
+                                </p>
+                            </div>
+
+                            <!-- Direct Download Floating Button -->
+                            <button @click.stop="downloadWallpaper(wallpaper)" 
+                                    :disabled="downloadingMap[wallpaper.filename]"
+                                    title="Direct Download Image File"
+                                    class="p-3 rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-400 text-white hover:scale-110 active:scale-95 transition-all shadow-xl shadow-indigo-500/40 cursor-pointer shrink-0">
+                                <i v-if="downloadingMap[wallpaper.filename]" data-lucide="loader-2" class="w-4.5 h-4.5 animate-spin"></i>
+                                <i v-else data-lucide="download" class="w-4.5 h-4.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Details -->
+                    <div class="p-3.5 flex items-center justify-between gap-2 border-t border-white/5 bg-slate-900/40">
+                        <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar">
+                            <span v-for="tag in (wallpaper.tags || []).slice(0, 3)" 
+                                  :key="tag"
+                                  @click.stop="selectedTag = tag"
+                                  class="px-2 py-0.5 rounded-lg bg-slate-800/80 hover:bg-indigo-600/30 border border-white/10 text-[10px] font-bold text-slate-300 hover:text-indigo-300 cursor-pointer transition-colors">
+                                #{{ tag }}
+                            </span>
+                            <span v-if="!wallpaper.tags || wallpaper.tags.length === 0" class="text-[10px] text-slate-500 italic">No tags</span>
+                        </div>
+
+                        <!-- Direct Download Link Button -->
+                        <button @click.stop="downloadWallpaper(wallpaper)" 
+                                :disabled="downloadingMap[wallpaper.filename]"
+                                class="px-2.5 py-1 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-indigo-300 text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer shrink-0">
+                            <i v-if="downloadingMap[wallpaper.filename]" data-lucide="loader-2" class="w-3 h-3 animate-spin"></i>
+                            <i v-else data-lucide="arrow-down-to-line" class="w-3 h-3"></i>
+                            <span>{{ downloadingMap[wallpaper.filename] ? 'Saving...' : 'Download' }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Pagination Button -->
+            <div v-if="displayLimit < filteredWallpapers.length" class="text-center pt-8 pb-4">
+                <button @click="displayLimit += 24" 
+                        class="px-8 py-3 rounded-2xl glass-panel hover:bg-indigo-600 text-white text-xs font-black tracking-wider uppercase border border-indigo-500/40 hover:border-indigo-400 transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer">
+                    Load More Wallpapers ({{ filteredWallpapers.length - displayLimit }} Remaining)
+                </button>
+            </div>
+
+        </main>
+
+        <!-- Fullscreen Lightbox / Preview Modal -->
+        <div v-if="activeWallpaper" 
+             @click.self="closeLightbox"
+             class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-slate-950/90 backdrop-blur-2xl animate-fadeIn">
+            
+            <div class="glass-panel w-full max-w-6xl max-h-[95dvh] rounded-3xl border border-white/20 shadow-2xl overflow-hidden flex flex-col lg:flex-row relative">
+                
+                <!-- Close Button -->
+                <button @click="closeLightbox" 
+                        class="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:bg-rose-500/30 transition-all cursor-pointer">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Navigation Arrow Left -->
+                <button @click="navigateLightbox(-1)" 
+                        class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:scale-110 transition-all cursor-pointer">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+
+                <!-- Navigation Arrow Right -->
+                <button @click="navigateLightbox(1)" 
+                        class="hidden sm:flex absolute right-16 lg:right-[340px] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:scale-110 transition-all cursor-pointer">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+
+                <!-- Left Column: Big Image Display Area -->
+                <div class="flex-1 bg-slate-950/90 relative flex items-center justify-center min-h-[300px] lg:min-h-[550px] p-4 overflow-hidden">
+                    <img :src="'./images/' + activeWallpaper.filename" 
+                         :alt="activeWallpaper.filename"
+                         @error="handleImgError($event, activeWallpaper)"
+                         :class="['max-w-full max-h-[75vh] object-contain transition-all duration-300 rounded-2xl shadow-2xl', 
+                                  isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in']"
+                         @click="isZoomed = !isZoomed">
+                    
+                    <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-[11px] text-slate-300 flex items-center gap-2">
+                        <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-indigo-400"></i>
+                        <span>Click image to {{ isZoomed ? 'Zoom Out' : 'Zoom In' }}</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Sidebar Specs & Actions -->
+                <div class="w-full lg:w-80 bg-slate-900/90 border-t lg:border-t-0 lg:border-l border-white/10 p-5 flex flex-col justify-between space-y-6 overflow-y-auto shrink-0">
+                    
+                    <!-- Title & Tags -->
+                    <div class="space-y-4">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-extrabold border border-indigo-500/30 uppercase tracking-wider">
+                                {{ getResolutionLabel(activeWallpaper.metadata.width, activeWallpaper.metadata.height) }}
+                            </span>
+                            <h3 class="text-xl font-black text-white mt-1.5 break-words">
+                                {{ formatTitle(activeWallpaper.filename) }}
+                            </h3>
+                            <p class="text-xs text-slate-400 font-mono mt-0.5">{{ activeWallpaper.filename }}</p>
+                        </div>
+
+                        <!-- Tag Pills -->
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Categories & Tags</label>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span v-for="tag in activeWallpaper.tags" 
+                                      :key="tag"
+                                      @click="selectedTag = tag; closeLightbox()"
+                                      class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-indigo-600/40 border border-white/10 text-xs font-bold text-slate-200 hover:text-white cursor-pointer transition-colors">
+                                    #{{ tag }}
+                                </span>
+                                <span v-if="!activeWallpaper.tags || activeWallpaper.tags.length === 0" class="text-xs text-slate-500 italic">No tags assigned</span>
+                            </div>
+                        </div>
+
+                        <!-- Specs Grid -->
+                        <div class="space-y-2 pt-2 border-t border-white/10">
+                            <label class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Technical Information</label>
+                            
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-0.5">
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Resolution</span>
+                                    <span class="font-extrabold text-white font-mono">{{ activeWallpaper.metadata.width }} x {{ activeWallpaper.metadata.height }}</span>
+                                </div>
+
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-0.5">
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">File Size</span>
+                                    <span class="font-extrabold text-white font-mono">{{ activeWallpaper.metadata.file_size_mb || '1.2' }} MB</span>
+                                </div>
+
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-0.5">
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Aspect Ratio</span>
+                                    <span class="font-extrabold text-white font-mono">{{ activeWallpaper.metadata.aspect_ratio || '16:9' }}</span>
+                                </div>
+
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-0.5">
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Format</span>
+                                    <span class="font-extrabold text-white font-mono uppercase">{{ getFileExt(activeWallpaper.filename) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="space-y-3 pt-4 border-t border-white/10">
+                        
+                        <!-- Primary Direct Download Button -->
+                        <button @click="downloadWallpaper(activeWallpaper)" 
+                                :disabled="downloadingMap[activeWallpaper.filename]"
+                                class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-xl shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer">
+                            <i v-if="downloadingMap[activeWallpaper.filename]" data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+                            <i v-else data-lucide="download" class="w-4 h-4"></i>
+                            <span>{{ downloadingMap[activeWallpaper.filename] ? 'Downloading Image...' : 'Direct Download Image' }}</span>
+                        </button>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <!-- Favorite Toggle -->
+                            <button @click="toggleFavorite(activeWallpaper)" 
+                                    :class="['py-2.5 px-3 rounded-xl border text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer', 
+                                             isFavorite(activeWallpaper.filename) ? 'bg-rose-500/20 text-rose-300 border-rose-500/40' : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border-white/10']">
+                                <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': isFavorite(activeWallpaper.filename)}"></i>
+                                <span>{{ isFavorite(activeWallpaper.filename) ? 'Saved' : 'Favorite' }}</span>
+                            </button>
+
+                            <!-- Copy Raw Link -->
+                            <button @click="copyRawLink(activeWallpaper)" 
+                                    class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-300 hover:text-white text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                                <span>Copy Link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications Floating Alert -->
+        <div v-if="toastMessage" 
+             class="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl glass-panel border border-indigo-500/50 shadow-2xl text-xs font-extrabold text-white flex items-center gap-3 animate-bounce">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+            <span>{{ toastMessage }}</span>
+        </div>
+
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        const { createApp, ref, computed, onMounted, watch, nextTick } = Vue;
+
+        createApp({
+            setup() {
+                const wallpapers = ref([]);
+                const searchQuery = ref('');
+                const selectedTag = ref('all');
+                const aspectFilter = ref('all');
+                const sortBy = ref('default');
+                const activeTab = ref('all');
+                const isDarkMode = ref(true);
+                const gridCols = ref(4);
+                const displayLimit = ref(24);
+                
+                const activeWallpaper = ref(null);
+                const isZoomed = ref(false);
+                const isSearchFocused = ref(false);
+                const highlightedIndex = ref(0);
+                
+                const favorites = ref([]);
+                const downloadingMap = ref({});
+                const toastMessage = ref('');
+                const searchInput = ref(null);
+
+                // Load Favorites from localStorage
+                try {
+                    const saved = localStorage.getItem('wallpaper_favorites');
+                    if (saved) favorites.value = JSON.parse(saved);
+                } catch(e) {}
+
+                // Load Wallpapers Database
+                onMounted(() => {
+                    fetch('./wallpapers_database.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            wallpapers.value = Object.values(data);
+                            nextTick(() => lucide.createIcons());
+                        })
+                        .catch(err => console.error('Error loading wallpapers DB:', err));
+
+                    // Keyboard shortcuts
+                    window.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            if (searchInput.value) searchInput.value.focus();
+                        }
+                        if (activeWallpaper.value) {
+                            if (e.key === 'Escape') closeLightbox();
+                            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                            if (e.key === 'ArrowRight') navigateLightbox(1);
+                        }
+                    });
+                });
+
+                // Toast Alert Notification
+                const showToast = (msg) => {
+                    toastMessage.value = msg;
+                    nextTick(() => lucide.createIcons());
+                    setTimeout(() => { toastMessage.value = ''; }, 3000);
+                };
+
+                // Helper Formatters
+                const formatTitle = (filename) => {
+                    return filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+                };
+
+                const getFileExt = (filename) => {
+                    return filename.split('.').pop().toUpperCase();
+                };
+
+                const getResolutionLabel = (w, h) => {
+                    if (!w || !h) return 'HD';
+                    if (w >= 7680) return '8K UHD';
+                    if (w >= 3840 || h >= 2160) return '4K UHD';
+                    if (w >= 2560 || h >= 1440) return '2K QHD';
+                    if (w >= 1920 || h >= 1080) return '1080p FHD';
+                    return 'HD';
+                };
+
+                // Image Error Fallback
+                const handleImgError = (e, wallpaper) => {
+                    if (wallpaper && wallpaper.github_raw_url) {
+                        e.target.src = wallpaper.github_raw_url;
+                    }
+                };
+
+                // Extracted Popular Tags
+                const popularTags = computed(() => {
+                    const counts = {};
+                    wallpapers.value.forEach(w => {
+                        (w.tags || []).forEach(t => {
+                            const tag = t.toLowerCase().trim();
+                            if (tag) counts[tag] = (counts[tag] || 0) + 1;
+                        });
+                    });
+                    return Object.keys(counts)
+                        .map(k => ({ name: k, count: counts[k] }))
+                        .sort((a, b) => b.count - a.count)
+                        .slice(0, 15);
+                });
+
+                // Filtered Wallpapers Computation
+                const filteredWallpapers = computed(() => {
+                    let list = wallpapers.value;
+
+                    // Favorites filter
+                    if (activeTab.value === 'favorites') {
+                        list = list.filter(w => favorites.value.includes(w.filename));
+                    }
+
+                    // Tag filter
+                    if (selectedTag.value !== 'all') {
+                        list = list.filter(w => (w.tags || []).some(t => t.toLowerCase() === selectedTag.value.toLowerCase()));
+                    }
+
+                    // Aspect ratio / Device filter
+                    if (aspectFilter.value === 'desktop') {
+                        list = list.filter(w => (w.metadata.aspect_ratio || 1.78) >= 1.3);
+                    } else if (aspectFilter.value === 'mobile') {
+                        list = list.filter(w => (w.metadata.aspect_ratio || 1.78) < 1.0);
+                    } else if (aspectFilter.value === '4k') {
+                        list = list.filter(w => (w.metadata.width || 0) >= 3840);
+                    }
+
+                    // Search Query Filter
+                    if (searchQuery.value.trim()) {
+                        const q = searchQuery.value.toLowerCase().trim();
+                        if (q.startsWith('@')) {
+                            const tagQ = q.slice(1);
+                            list = list.filter(w => (w.tags || []).some(t => t.toLowerCase().includes(tagQ)));
+                        } else {
+                            list = list.filter(w => 
+                                formatTitle(w.filename).toLowerCase().includes(q) ||
+                                (w.tags || []).some(t => t.toLowerCase().includes(q))
+                            );
+                        }
+                    }
+
+                    // Sorting
+                    if (sortBy.value === 'resolution') {
+                        list = [...list].sort((a, b) => (b.metadata.width * b.metadata.height) - (a.metadata.width * a.metadata.height));
+                    } else if (sortBy.value === 'size') {
+                        list = [...list].sort((a, b) => (b.metadata.file_size_mb || 0) - (a.metadata.file_size_mb || 0));
+                    } else if (sortBy.value === 'name') {
+                        list = [...list].sort((a, b) => a.filename.localeCompare(b.filename));
+                    }
+
+                    return list;
+                });
+
+                const searchResults = computed(() => filteredWallpapers.value);
+
+                const paginatedWallpapers = computed(() => {
+                    return filteredWallpapers.value.slice(0, displayLimit.value);
+                });
+
+                // Reset Filters
+                const resetFilters = () => {
+                    searchQuery.value = '';
+                    selectedTag.value = 'all';
+                    aspectFilter.value = 'all';
+                    sortBy.value = 'default';
+                    activeTab.value = 'all';
+                    displayLimit.value = 24;
+                };
+
+                // Lightbox Actions
+                const openLightbox = (wallpaper) => {
+                    activeWallpaper.value = wallpaper;
+                    isZoomed.value = false;
+                    nextTick(() => lucide.createIcons());
+                };
+
+                const closeLightbox = () => {
+                    activeWallpaper.value = null;
+                    isZoomed.value = false;
+                };
+
+                const navigateLightbox = (dir) => {
+                    if (!activeWallpaper.value) return;
+                    const list = filteredWallpapers.value;
+                    const index = list.findIndex(w => w.filename === activeWallpaper.value.filename);
+                    if (index !== -1) {
+                        let nextIdx = index + dir;
+                        if (nextIdx < 0) nextIdx = list.length - 1;
+                        if (nextIdx >= list.length) nextIdx = 0;
+                        activeWallpaper.value = list[nextIdx];
+                        isZoomed.value = false;
+                        nextTick(() => lucide.createIcons());
+                    }
+                };
+
+                // Favorites System
+                const isFavorite = (filename) => favorites.value.includes(filename);
+
+                const toggleFavorite = (wallpaper) => {
+                    const fn = wallpaper.filename;
+                    if (isFavorite(fn)) {
+                        favorites.value = favorites.value.filter(f => f !== fn);
+                        showToast(`Removed ${formatTitle(fn)} from Favorites`);
+                    } else {
+                        favorites.value.push(fn);
+                        showToast(`Saved ${formatTitle(fn)} to Favorites ❤️`);
+                    }
+                    localStorage.setItem('wallpaper_favorites', JSON.stringify(favorites.value));
+                };
+
+                // DIRECT DOWNLOAD ENGINE (Fixes opening in new tab)
+                const downloadWallpaper = async (wallpaper) => {
+                    const fn = wallpaper.filename;
+                    downloadingMap.value[fn] = true;
+                    showToast(`Starting download for ${fn}...`);
+
+                    try {
+                        // Fetch local relative image file first
+                        const localUrl = `./images/${fn}`;
+                        let response = await fetch(localUrl);
+
+                        if (!response.ok && wallpaper.github_raw_url) {
+                            response = await fetch(wallpaper.github_raw_url);
+                        }
+
+                        if (!response.ok) throw new Error('Fetch failed');
+
+                        const blob = await response.blob();
+                        const blobUrl = window.URL.createObjectURL(blob);
+                        
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = blobUrl;
+                        a.download = fn;
+                        document.body.appendChild(a);
+                        a.click();
+                        
+                        setTimeout(() => {
+                            window.URL.revokeObjectURL(blobUrl);
+                            document.body.removeChild(a);
+                        }, 1000);
+
+                        showToast(`Downloaded ${fn} successfully!`);
+                    } catch (err) {
+                        console.warn('Direct blob fetch fallback:', err);
+                        // Programmatic download link fallback
+                        const a = document.createElement('a');
+                        a.href = `./images/${fn}`;
+                        a.download = fn;
+                        a.click();
+                        showToast(`Downloading ${fn}...`);
+                    } finally {
+                        downloadingMap.value[fn] = false;
+                    }
+                };
+
+                // Copy Link
+                const copyRawLink = (wallpaper) => {
+                    const url = wallpaper.github_raw_url || (window.location.origin + '/images/' + wallpaper.filename);
+                    navigator.clipboard.writeText(url);
+                    showToast(`Copied raw image link to clipboard!`);
+                };
+
+                // Theme Toggle
+                const toggleTheme = () => {
+                    isDarkMode.value = !isDarkMode.value;
+                    document.documentElement.classList.toggle('dark', isDarkMode.value);
+                };
+
+                watch([selectedTag, searchQuery, aspectFilter, sortBy], () => {
+                    displayLimit.value = 24;
+                    nextTick(() => lucide.createIcons());
+                });
+
+                return {
+                    wallpapers,
+                    searchQuery,
+                    selectedTag,
+                    aspectFilter,
+                    sortBy,
+                    activeTab,
+                    isDarkMode,
+                    gridCols,
+                    displayLimit,
+                    activeWallpaper,
+                    isZoomed,
+                    isSearchFocused,
+                    highlightedIndex,
+                    favorites,
+                    downloadingMap,
+                    toastMessage,
+                    searchInput,
+                    popularTags,
+                    filteredWallpapers,
+                    searchResults,
+                    paginatedWallpapers,
+                    formatTitle,
+                    getFileExt,
+                    getResolutionLabel,
+                    handleImgError,
+                    resetFilters,
+                    openLightbox,
+                    closeLightbox,
+                    navigateLightbox,
+                    isFavorite,
+                    toggleFavorite,
+                    downloadWallpaper,
+                    copyRawLink,
+                    toggleTheme,
+                    showToast
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
