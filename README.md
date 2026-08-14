@@ -2,10 +2,12 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Repository](https://img.shields.io/badge/GitHub-saurabhdhull1%2Fwallpapers-indigo.svg)](https://github.com/saurabhdhull1/wallpapers)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-emerald.svg)](https://saurabhdhull1.github.io/wallpapers/)
 
 A modern, high-performance, glassmorphic web application for browsing, searching, and directly downloading high-resolution (4K, 8K, 1080p) wallpapers. Built with Vue 3, Tailwind CSS, Lucide Icons, and direct blob downloading engine.
 
-**Repository:** [https://github.com/saurabhdhull1/wallpapers](https://github.com/saurabhdhull1/wallpapers)
+**🌐 Live Demo:** [https://saurabhdhull1.github.io/wallpapers/](https://saurabhdhull1.github.io/wallpapers/)  
+**📁 Repository:** [https://github.com/saurabhdhull1/wallpapers](https://github.com/saurabhdhull1/wallpapers)
 
 ---
 
