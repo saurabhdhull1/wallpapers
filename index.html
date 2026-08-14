@@ -14,10 +14,6 @@
     <!-- Vue 3 & Tailwind CSS -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://unpkg.com/lucide-vue-next@latest"></script>
 
     <script>
         tailwind.config = {
@@ -36,22 +32,6 @@
                             500: '#6366f1',
                             600: '#4f46e5',
                             900: '#312e81',
-                        },
-                        neon: {
-                            cyan: '#00f2fe',
-                            teal: '#4facfe',
-                            pink: '#ff0844',
-                            purple: '#b224ef'
-                        }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -77,19 +57,19 @@
         }
 
         .glass-panel {
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .light-mode .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.9);
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.5);
+            background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -98,11 +78,11 @@
         .glass-card:hover {
             border-color: rgba(99, 102, 241, 0.5);
             transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.3);
         }
 
         .light-mode .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(226, 232, 240, 0.9);
         }
         .light-mode .glass-card:hover {
@@ -123,12 +103,6 @@
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
         }
 
-        .text-gradient {
-            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #38bdf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -143,7 +117,7 @@
 
         <!-- Background Glow Orbs -->
         <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-            <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px] animate-pulse-slow"></div>
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px]"></div>
             <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]"></div>
             <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-purple-600/15 rounded-full blur-[128px]"></div>
             <div class="absolute inset-0 bg-grid-pattern"></div>
@@ -158,7 +132,7 @@
                     <a href="#" @click.preventDefault="resetFilters" class="flex items-center space-x-3 group">
                         <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[2px] shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform duration-300">
                             <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                                <i data-lucide="image" class="w-5 h-5 text-indigo-400 group-hover:rotate-6 transition-transform"></i>
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                             </div>
                         </div>
                         <div>
@@ -179,12 +153,12 @@
                         <button @click="activeTab = activeTab === 'favorites' ? 'all' : 'favorites'" 
                                 :class="['p-2 rounded-xl border transition-all text-xs font-bold flex items-center gap-1', 
                                          activeTab === 'favorites' ? 'bg-rose-500/20 text-rose-400 border-rose-500/40' : 'bg-slate-800/80 border-white/10 text-slate-300']">
-                            <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}"></i>
+                            <svg class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                             <span>{{ favorites.length }}</span>
                         </button>
 
                         <button @click="toggleTheme" class="p-2 rounded-xl bg-slate-800/80 border border-white/10 text-slate-300 hover:text-white transition-all">
-                            <i :data-lucide="isDarkMode ? 'sun' : 'moon'" class="w-4 h-4"></i>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                         </button>
                     </div>
                 </div>
@@ -192,7 +166,7 @@
                 <!-- Central Search Bar -->
                 <div class="relative w-full md:max-w-xl">
                     <div class="relative flex items-center">
-                        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 text-slate-400"></i>
+                        <svg class="w-4 h-4 absolute left-3.5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         <input 
                             ref="searchInput"
                             type="text" 
@@ -208,7 +182,7 @@
                         >
                         <div class="absolute right-3 flex items-center gap-1.5 text-xs text-slate-400">
                             <button v-if="searchQuery" @click="searchQuery = ''" class="p-1 hover:text-white transition-colors">
-                                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                             </button>
                             <span v-else class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 rounded border border-white/10 text-slate-400">Ctrl K</span>
                         </div>
@@ -232,7 +206,7 @@
                                     <span v-if="item.tags.length">• Tags: {{ item.tags.join(', ') }}</span>
                                 </p>
                             </div>
-                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </div>
                     </div>
                 </div>
@@ -244,7 +218,7 @@
                     <button @click="activeTab = activeTab === 'favorites' ? 'all' : 'favorites'" 
                             :class="['px-3.5 py-2 rounded-2xl border transition-all text-xs font-extrabold flex items-center gap-2 cursor-pointer shadow-sm', 
                                      activeTab === 'favorites' ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-rose-500/20' : 'bg-slate-900/80 hover:bg-slate-800 border-white/10 text-slate-300']">
-                        <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}"></i>
+                        <svg class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': favorites.length > 0}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         <span>Favorites</span>
                         <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-800 text-rose-400 border border-rose-500/30">{{ favorites.length }}</span>
                     </button>
@@ -269,7 +243,7 @@
                     <button @click="toggleTheme" 
                             title="Toggle Light/Dark Theme"
                             class="p-2.5 rounded-2xl bg-slate-900/80 border border-white/10 text-slate-300 hover:text-white hover:border-indigo-500/50 transition-all cursor-pointer">
-                        <i :data-lucide="isDarkMode ? 'sun' : 'moon'" class="w-4.5 h-4.5"></i>
+                        <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                     </button>
                 </div>
             </div>
@@ -283,7 +257,7 @@
                 <button @click="selectedTag = 'all'" 
                         :class="['px-4 py-2 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer shadow-sm', 
                                  selectedTag === 'all' ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-indigo-500/25 scale-105' : 'bg-slate-900/70 hover:bg-slate-800 border border-white/10 text-slate-300']">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                     <span>All Wallpapers</span>
                     <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-950/50 text-indigo-300">{{ wallpapers.length }}</span>
                 </button>
@@ -316,26 +290,16 @@
                     <button v-if="selectedTag !== 'all' || searchQuery || activeTab === 'favorites' || aspectFilter !== 'all'" 
                             @click="resetFilters"
                             class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1">
-                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                         <span>Reset Filters</span>
                     </button>
-
-                    <!-- Column Layout Selector -->
-                    <div class="hidden sm:flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-white/10">
-                        <button @click="gridCols = 3" :class="['p-1.5 rounded-lg transition-all', gridCols === 3 ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white']">
-                            <i data-lucide="grid-2x2" class="w-4 h-4"></i>
-                        </button>
-                        <button @click="gridCols = 4" :class="['p-1.5 rounded-lg transition-all', gridCols === 4 ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white']">
-                            <i data-lucide="grid-3x3" class="w-4 h-4"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
 
             <!-- Empty State -->
             <div v-if="filteredWallpapers.length === 0" class="py-20 text-center space-y-4 glass-panel rounded-3xl border border-white/10">
                 <div class="w-16 h-16 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto border border-indigo-500/30">
-                    <i data-lucide="image-off" class="w-8 h-8"></i>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 </div>
                 <div>
                     <h3 class="text-lg font-black text-white">No wallpapers match your criteria</h3>
@@ -349,8 +313,7 @@
             </div>
 
             <!-- Main Wallpaper Cards Grid -->
-            <div v-else :class="['grid gap-4 sm:gap-6 transition-all duration-300', 
-                                gridCols === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4']">
+            <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 transition-all duration-300">
                 
                 <div v-for="wallpaper in paginatedWallpapers" 
                      :key="wallpaper.filename"
@@ -381,7 +344,7 @@
                                 :title="isFavorite(wallpaper.filename) ? 'Remove from favorites' : 'Save to favorites'"
                                 :class="['absolute top-3 right-3 p-2 rounded-2xl backdrop-blur-md border transition-all z-10 cursor-pointer shadow-lg', 
                                          isFavorite(wallpaper.filename) ? 'bg-rose-500/30 border-rose-500/60 text-rose-400' : 'bg-slate-950/60 border-white/20 text-white hover:bg-rose-500/20 hover:text-rose-400']">
-                            <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500': isFavorite(wallpaper.filename)}"></i>
+                            <svg class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': isFavorite(wallpaper.filename)}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         </button>
 
                         <!-- Hover Action Quick Overlay -->
@@ -400,8 +363,8 @@
                                     :disabled="downloadingMap[wallpaper.filename]"
                                     title="Direct Download Image File"
                                     class="p-3 rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-400 text-white hover:scale-110 active:scale-95 transition-all shadow-xl shadow-indigo-500/40 cursor-pointer shrink-0">
-                                <i v-if="downloadingMap[wallpaper.filename]" data-lucide="loader-2" class="w-4.5 h-4.5 animate-spin"></i>
-                                <i v-else data-lucide="download" class="w-4.5 h-4.5"></i>
+                                <svg v-if="downloadingMap[wallpaper.filename]" class="w-4.5 h-4.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                                <svg v-else class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                             </button>
                         </div>
                     </div>
@@ -422,8 +385,8 @@
                         <button @click.stop="downloadWallpaper(wallpaper)" 
                                 :disabled="downloadingMap[wallpaper.filename]"
                                 class="px-2.5 py-1 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-indigo-300 text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer shrink-0">
-                            <i v-if="downloadingMap[wallpaper.filename]" data-lucide="loader-2" class="w-3 h-3 animate-spin"></i>
-                            <i v-else data-lucide="arrow-down-to-line" class="w-3 h-3"></i>
+                            <svg v-if="downloadingMap[wallpaper.filename]" class="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                            <svg v-else class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                             <span>{{ downloadingMap[wallpaper.filename] ? 'Saving...' : 'Download' }}</span>
                         </button>
                     </div>
@@ -450,19 +413,19 @@
                 <!-- Close Button -->
                 <button @click="closeLightbox" 
                         class="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:bg-rose-500/30 transition-all cursor-pointer">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
 
                 <!-- Navigation Arrow Left -->
                 <button @click="navigateLightbox(-1)" 
                         class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:scale-110 transition-all cursor-pointer">
-                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 </button>
 
                 <!-- Navigation Arrow Right -->
                 <button @click="navigateLightbox(1)" 
                         class="hidden sm:flex absolute right-16 lg:right-[340px] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-slate-950/80 border border-white/20 text-slate-300 hover:text-white hover:scale-110 transition-all cursor-pointer">
-                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
 
                 <!-- Left Column: Big Image Display Area -->
@@ -475,7 +438,7 @@
                          @click="isZoomed = !isZoomed">
                     
                     <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-[11px] text-slate-300 flex items-center gap-2">
-                        <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-indigo-400"></i>
+                        <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                         <span>Click image to {{ isZoomed ? 'Zoom Out' : 'Zoom In' }}</span>
                     </div>
                 </div>
@@ -544,8 +507,8 @@
                         <button @click="downloadWallpaper(activeWallpaper)" 
                                 :disabled="downloadingMap[activeWallpaper.filename]"
                                 class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-xl shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer">
-                            <i v-if="downloadingMap[activeWallpaper.filename]" data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
-                            <i v-else data-lucide="download" class="w-4 h-4"></i>
+                            <svg v-if="downloadingMap[activeWallpaper.filename]" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                            <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                             <span>{{ downloadingMap[activeWallpaper.filename] ? 'Downloading Image...' : 'Direct Download Image' }}</span>
                         </button>
 
@@ -554,14 +517,14 @@
                             <button @click="toggleFavorite(activeWallpaper)" 
                                     :class="['py-2.5 px-3 rounded-xl border text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer', 
                                              isFavorite(activeWallpaper.filename) ? 'bg-rose-500/20 text-rose-300 border-rose-500/40' : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border-white/10']">
-                                <i data-lucide="heart" class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': isFavorite(activeWallpaper.filename)}"></i>
+                                <svg class="w-4 h-4" :class="{'fill-rose-500 text-rose-500': isFavorite(activeWallpaper.filename)}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                                 <span>{{ isFavorite(activeWallpaper.filename) ? 'Saved' : 'Favorite' }}</span>
                             </button>
 
                             <!-- Copy Raw Link -->
                             <button @click="copyRawLink(activeWallpaper)" 
                                     class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-300 hover:text-white text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer">
-                                <i data-lucide="copy" class="w-4 h-4"></i>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 <span>Copy Link</span>
                             </button>
                         </div>
@@ -573,7 +536,7 @@
         <!-- Toast Notifications Floating Alert -->
         <div v-if="toastMessage" 
              class="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl glass-panel border border-indigo-500/50 shadow-2xl text-xs font-extrabold text-white flex items-center gap-3 animate-bounce">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>{{ toastMessage }}</span>
         </div>
 
@@ -592,7 +555,6 @@
                 const sortBy = ref('default');
                 const activeTab = ref('all');
                 const isDarkMode = ref(true);
-                const gridCols = ref(4);
                 const displayLimit = ref(24);
                 
                 const activeWallpaper = ref(null);
@@ -617,7 +579,6 @@
                         .then(res => res.json())
                         .then(data => {
                             wallpapers.value = Object.values(data);
-                            nextTick(() => lucide.createIcons());
                         })
                         .catch(err => console.error('Error loading wallpapers DB:', err));
 
@@ -638,7 +599,6 @@
                 // Toast Alert Notification
                 const showToast = (msg) => {
                     toastMessage.value = msg;
-                    nextTick(() => lucide.createIcons());
                     setTimeout(() => { toastMessage.value = ''; }, 3000);
                 };
 
@@ -751,7 +711,6 @@
                 const openLightbox = (wallpaper) => {
                     activeWallpaper.value = wallpaper;
                     isZoomed.value = false;
-                    nextTick(() => lucide.createIcons());
                 };
 
                 const closeLightbox = () => {
@@ -769,7 +728,6 @@
                         if (nextIdx >= list.length) nextIdx = 0;
                         activeWallpaper.value = list[nextIdx];
                         isZoomed.value = false;
-                        nextTick(() => lucide.createIcons());
                     }
                 };
 
@@ -849,7 +807,6 @@
 
                 watch([selectedTag, searchQuery, aspectFilter, sortBy], () => {
                     displayLimit.value = 24;
-                    nextTick(() => lucide.createIcons());
                 });
 
                 return {
@@ -860,7 +817,6 @@
                     sortBy,
                     activeTab,
                     isDarkMode,
-                    gridCols,
                     displayLimit,
                     activeWallpaper,
                     isZoomed,
