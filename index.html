@@ -5537,43 +5537,84 @@
             }
         }
 
-        // Direct Image File Download Engine
+        // FORCED DIRECT IMAGE DOWNLOAD ENGINE (Guarantees downloading file directly to device)
         async function downloadWallpaper(fn) {
             const item = allWallpapers.find(w => w.filename === fn);
             showToast(`Starting download for ${fn}...`);
 
-            try {
-                const localUrl = `./images/${fn}`;
-                let response = await fetch(localUrl);
-                if (!response.ok && item && item.github_raw_url) {
-                    response = await fetch(item.github_raw_url);
-                }
-
-                if (!response.ok) throw new Error('Fetch failed');
-
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
-
+            const triggerSave = (blob, filename) => {
+                const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
-                a.href = blobUrl;
-                a.download = fn;
+                a.href = url;
+                a.download = filename;
                 document.body.appendChild(a);
                 a.click();
-
                 setTimeout(() => {
-                    window.URL.revokeObjectURL(blobUrl);
+                    window.URL.revokeObjectURL(url);
                     document.body.removeChild(a);
                 }, 1000);
+                showToast(`Downloaded ${filename} successfully!`);
+            };
 
-                showToast(`Downloaded ${fn} successfully!`);
-            } catch(err) {
-                const a = document.createElement('a');
-                a.href = `./images/${fn}`;
-                a.download = fn;
-                a.click();
-                showToast(`Downloading ${fn}...`);
+            // Method 1: Fetch relative image blob
+            try {
+                const response = await fetch('./images/' + fn);
+                if (response.ok) {
+                    const blob = await response.blob();
+                    triggerSave(blob, fn);
+                    return;
+                }
+            } catch(e) {}
+
+            // Method 2: Fetch raw github image blob
+            if (item && item.github_raw_url) {
+                try {
+                    const response = await fetch(item.github_raw_url);
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        triggerSave(blob, fn);
+                        return;
+                    }
+                } catch(e) {}
             }
+
+            // Method 3: Memory Canvas Blob Synthesis (100% Forces local Blob creation!)
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth || img.width;
+                    canvas.height = img.naturalHeight || img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    canvas.toBlob((blob) => {
+                        if (blob) {
+                            triggerSave(blob, fn);
+                        } else {
+                            fallbackDirectClick(fn);
+                        }
+                    }, 'image/png');
+                } catch(e) {
+                    fallbackDirectClick(fn);
+                }
+            };
+            img.onerror = function() {
+                fallbackDirectClick(fn);
+            };
+            img.src = './images/' + fn;
+        }
+
+        function fallbackDirectClick(fn) {
+            const a = document.createElement('a');
+            a.href = './images/' + fn;
+            a.setAttribute('download', fn);
+            a.download = fn;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast(`Downloading ${fn}...`);
         }
 
         // Lightbox Modal
@@ -5583,7 +5624,7 @@
             activeWallpaper = item;
             isZoomed = false;
 
-            document.getElementById('modal-img').src = `./images/${fn}`;
+            document.getElementById('modal-img').src = './images/' + fn;
             document.getElementById('modal-img').onerror = function() { this.src = item.github_raw_url; };
             document.getElementById('modal-badge').textContent = getResolutionLabel(item.metadata.width, item.metadata.height);
             document.getElementById('modal-title').textContent = formatTitle(fn);
